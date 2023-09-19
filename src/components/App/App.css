@@ -1,0 +1,7 @@
+.App {
+  display: flex;
+  gap: 40px;
+}
+.test_input {
+  margin: 50px;
+}
