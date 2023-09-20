@@ -1,8 +1,8 @@
-import "./App.css";
 import templateModeration from "../../templateModeration.js";
 import ModerationList from "../ModerationList/ModerationList";
 import { useEffect, useState } from "react";
-import SearchPanel from "../SearchPanel/SearchPanel";
+import SearchPanel from "../SearchPanel/SearchPanel.js";
+
 
 function App() {
     const [cards, setCards] = useState(templateModeration);
@@ -33,10 +33,14 @@ function App() {
 
         updateData([
             {
-                title: 'result',
+                title: 'Результат пошуку',
                 template: upData
             }
         ])
+    }
+
+    const handleAddUserInput = (e) => {
+        setAddUserName(e.target.value)
     }
 
     const filteredArray = (arr, value) => {
@@ -90,30 +94,15 @@ function App() {
 
     return (
         <>
-        <div className="wrap">
-            <SearchPanel
-                text="пошук за ключовими словами"
-                type="text"
-                name='searchText'
-                value={searchText}
-                handleFunction={handleFilterInput}
-                resetInputData={resetInputData}
-                className="test_input"
-            />
-            <SearchPanel
-                text="додати ім'я користувача"
-                type="text"
-                name='addUserName'
-                value={addUserName}
-                resetInputData={resetInputData}
-                handleFunction={(e) => setAddUserName(e.target.value)}
-                className="test_input"
-            />
-            <button onClick={resetData}>
-                Delete all
-            </button>
-        </div>
-        <div className="App" onClick={handleClick}>{items}</div>
+        <SearchPanel 
+            searchText={searchText} 
+            handleFilterInput={handleFilterInput}
+            resetInputData={resetInputData}
+            addUserName={addUserName}
+            handleAddUserInput={handleAddUserInput}
+            resetData={resetData}
+        />
+        <div className="cards__row" onClick={handleClick}>{items}</div>
         </>
     );
 }

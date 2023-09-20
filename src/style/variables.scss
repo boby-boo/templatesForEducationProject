@@ -1,0 +1,15 @@
+$lightBlue: #cadae4;
+$lightColor: #fff;
+$mainColor: #878787;
+$blackColor:#000;
+$hoverColor: #eb4242;
+
+@mixin templateFlex($flex, $justify-content, $align-items) {
+    display: $flex;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+
+@mixin templateTransition($animate) {
+    transition: $animate .3s ease;
+} 

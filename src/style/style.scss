@@ -1,0 +1,166 @@
+@import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&family=Oswald:wght@400;500;600&display=swap');
+
+html {
+    min-width: 300vh;
+}
+
+body {
+    // background-color: $lightBlue;
+    font-family: 'Open Sans', sans-serif;
+    color: $mainColor;
+    // background-color: #dfdfdf;
+    background-color: transparentize(blue, 0.6);
+    font-size: 16px;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background: transparentize(#000, 0.5)
+}
+
+// ::-webkit-scrollbar-track {
+//     background: transparentize($lightColor, 0.5);
+// }
+
+// ::-webkit-scrollbar-thumb {
+//     background: #c8d9cf;
+//     background: #aee6c4;
+//     background: $hoverColor;
+//     height: 20px;
+// }
+
+.button {
+    background-color: #df6d6d;
+    border: none;
+    cursor: pointer;
+    transition: background-color .3s ease;
+    &:hover {
+        background-color: $hoverColor;
+    }
+}
+
+.search__panel {
+    position: fixed;
+    top: 0;
+    right: 50%;
+    width: 100%;
+    padding: 2% 0 1%;
+    transform: translateX(50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 40px;
+    background-color: inherit;
+
+    &_button {
+        min-width: 200px;
+        min-height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $lightColor;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border-radius: 5px;
+        text-transform: uppercase;
+    }
+}
+
+.input__wrapper {
+    max-width: 350px;
+    width: 100%;
+    display: flex;
+}
+
+.panel__input {
+    max-width: 300px;
+    width: 100%;
+    padding: 12px 12px 12px 60px;
+    color: $blackColor;
+    background-color: $lightColor;
+    border-radius: 5px;
+    border: none;
+    transition: all .3s ease;
+
+    &:focus {
+        box-shadow: 0px 4px 6px 3px #2d53db1a;
+        background-color: #e5f1f8e6;
+        border: none;
+        outline: none;
+    }
+
+    &:hover {
+        background-color: transparentize(#e5f1f8e6, 0.11);
+    }
+
+    &_button {
+        width: 30px;
+        border-radius: 0 5px 5px 0;
+        background: #df6d6d url(../assets/closeIcon.svg) center center / 30px 30px no-repeat;
+    }
+}
+
+.input__active {
+    border-radius: 5px 0 0 5px;
+}
+
+.input__search  {
+    background: $lightColor url(../assets/searchIcon.svg) 10px center / 20px 20px no-repeat;
+}
+
+.input__user  {
+    background: $lightColor url(../assets/userIcon.svg) 10px center / 20px 20px no-repeat;
+}
+
+.cards__row {
+    margin-top: 6%;
+    @include templateFlex(flex, center, flex-start);
+    gap: 25px;
+    // min-width: 100vw;
+    // min-height: 100vh;
+}
+
+.cards__list {
+    // max-width: 300px;
+    height: 100vh;
+    padding: 20px;
+    overflow-y: scroll;
+    word-wrap: break-word;
+    @include templateFlex(flex, flex-start, center);
+    flex-direction: column;
+    gap: 10px;
+    background-color: transparentize($lightColor, 0.6);
+    border-radius: 10px;
+
+    h2 {
+        text-align: center;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    .card {
+        min-height: 200px;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: transparentize($lightColor, 0.2);
+        @include templateTransition(background-color);
+        cursor: pointer;
+
+        &:hover {
+            background-color: transparentize($lightColor, 0.05)
+        }
+
+        &:active {
+            background-color: transparentize($lightColor, 0.2)
+        }
+
+        span {
+            display: block;
+            max-width: 80px;
+            margin-left: auto;
+            font-style: italic;
+        }
+    }
+}

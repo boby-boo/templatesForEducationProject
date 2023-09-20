@@ -1,7 +1,4 @@
 import React from 'react';
-import './moderationList.css'
-
-const emojiArray = "📚,  🔔,  🧩, ⏰, 💡, 🔧, ⚙️, 📩, 📪, 🗓, 📍, 📌, 🔍, ❗️, ⬇️, 📢, 📑, 📨, 📃, 📣, ':yt:', ':buffering:'";
 
 const ModerationList = (props) => {
     const {title, data, value} = props;
@@ -15,7 +12,6 @@ const ModerationList = (props) => {
             } else {
                 str = item.desc;
             }
-            // const str = value ? `${value}, ${item.desc[0].toLowerCase() + item.desc.slice(1)}` : item.desc;
             return (
                 <li key={item.id}
                 className='card'>
@@ -24,16 +20,18 @@ const ModerationList = (props) => {
                     </div>
                 <br/>
                 <span>{item.desc.length}/200</span>
-            </li>
+                </li>
             )
         }
         )
 
         return (
-            <ul className='cards__row'>
+            <>
+            <ul className='cards__list'>
                 <h2>{title}</h2>
                 {items}
             </ul>
+            </>
         )
     }
     
