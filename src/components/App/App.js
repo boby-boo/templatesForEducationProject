@@ -1,179 +1,121 @@
 import "./App.css";
 import templateModeration from "../../templateModeration.js";
 import ModerationList from "../ModerationList/ModerationList";
-import { useEffect, useState, useRef } from "react";
-import InputPanel from "../InputPanel/InputPanel";
+import { useEffect, useState } from "react";
+import SearchPanel from "../SearchPanel/SearchPanel";
 
 function App() {
-    const [cards, setCards] = useState([]);
+    const [cards, setCards] = useState(templateModeration);
     const [searchText, setSearchText] = useState('');
     const [addUserName, setAddUserName] = useState('');
     const [isLoaded, setIsLoaded] = useState(false);
+    const [idArr, setIdArr] = useState([]);
 
     useEffect(() => {
-        getData();
-    }, []);
-    const getData = (arr=templateModeration) => {
-        return setTimeout(() => {setCards(arr)}, 400)
-    };
+        renderItems(templateModeration, addUserName)
+    }, [addUserName])
+
+    const updateData = (arr=templateModeration) => {
+        setCards(arr)
+    }
 
     const handleFilterInput = (e) => {
-        let value = e.target.value;
+        const value = e.target.value;
         setSearchText(value);
 
-        if (value === '' && addUserName.length !== 0) {
-            const updateArray = getDataUpdate(addUserName)
-            console.log('updateArray', updateArray)
-            console.log('value.length', value.length)
-            console.log('addUserName', addUserName)
-            getData(updateArray);
-            return;
-        }
-
         if (value === '') {
-            getData();
+            setSearchText('')
+            updateData()
+            return 
         }
 
-        console.log(value)
-        console.log(cards)
-        const newLicenseBlock = filteredArray(value)
-        updateData(newLicenseBlock);
-        // updateData([
-        //     {
-        //         title: "Результати пошуку",
-        //         template: [...newLicenseBlock],
-        //     },
-        // ]);
-    };
+        const upData = filteredArray(templateModeration, value);
 
-    const filteredArray = (value, arr=templateModeration) => {
-        const newLicenseBlock = arr
-            .map((item) => item.template)
-            .flat(Infinity)
-            .filter((item) => item.toLowerCase().includes(value.toLowerCase()));
-
-        return [
+        updateData([
             {
-                title: "Результати пошуку",
-                template: [...newLicenseBlock],
-            },
-        ]
+                title: 'result',
+                template: upData
+            }
+        ])
     }
 
-    const handleNameInput = (e) => {
-        const value = e.target.value;
-        setAddUserName(value);
+    const filteredArray = (arr, value) => {
+        return arr
+            .map(card => card.template)
+            .flat(Infinity)
+            .filter(template => {
+                if (template.desc.toLowerCase().includes(value.toLowerCase())) {
+                    const str = `${addUserName}, ${template.desc[0].toLowerCase()}${template.desc.slice(1)}`;
+                    return {
+                        id: template.id,
+                        desc: str
+                    }
+                }
+            })
+    }
 
-        if (value === "") {
-            getData();
-            setAddUserName("");
+    const resetData = () => {
+        setSearchText('')
+        setAddUserName('')
+        updateData()
+    }
+
+    const resetInputData = (value) => {
+        if (value === 'searchText') {
+            setSearchText('')
+            updateData()
+        } 
+        if (value === 'addUserName') {
+            setAddUserName('')
+        } 
+    }
+
+    const renderItems = (data, value) => {
+        return data.map((item, index) => <ModerationList value={value} key={index} title={item.title} data={item.template}/>)
+    };
+
+    const handleClick = (e) => {
+        if (e.target.tagName === 'LI') {
+            navigator.clipboard.writeText(e.target.childNodes[0].textContent);
+            return;
+        } 
+        if (e.target.tagName === 'DIV') {
+            console.log('DIV')
+            navigator.clipboard.writeText(e.target.textContent);
             return;
         }
-
-        // if (value !== '' && searchText !== '') {
-        //     const updateArray = getDataUpdate(value)
-        //     updateData(updateArray);
-        // }
-
-        const updateArray = searchText === '' ? getDataUpdate(value) : getDataUpdate(value, cards)
-        updateData(updateArray);
-    };
-
-    const getDataUpdate = (addUserName, arr=templateModeration) => {
-
-        return arr.map((item) => {
-            const newArr = item.template.map(
-                (i) => `${addUserName}, ${i[0].toLocaleLowerCase() + i.slice(1, -1)}`
-            );
-
-            return {
-                title: item.title,
-                template: newArr,
-            };
-        });
-
     }
-
-    const updateData = (data) => {
-        setCards(data);
-    };
-
-    const renderItems = (data) => {
-        return data.map((item, index) => (
-            <ModerationList
-                title={item.title}
-                data={item.template}
-                key={index}
-            />
-        ));
-    };
-
-    if (isLoaded) {
-        return <h1>Loading</h1>;
-    }
-
-    const items = renderItems(cards);
+    
+    const items = renderItems(cards, addUserName);
 
     return (
         <>
-        <InputPanel
-            text="пошук за ключовими словами"
-            type="text"
-            value={searchText}
-            className="test_input"
-            handleFunction={handleFilterInput}
-        />
-        <InputPanel
-            text="додати ім'я користувача"
-            type="text"
-            value={addUserName}
-            className="test_input"
-            handleFunction={handleNameInput}
-        />
-            {/* <input
-                placeholder="пошук за ключовими словами"
+        <div className="wrap">
+            <SearchPanel
+                text="пошук за ключовими словами"
                 type="text"
+                name='searchText'
                 value={searchText}
+                handleFunction={handleFilterInput}
+                resetInputData={resetInputData}
                 className="test_input"
-                onChange={handleFilterInput}
-            /> */}
-
-            {/* <input
-                placeholder="додати ім'я користувача"
+            />
+            <SearchPanel
+                text="додати ім'я користувача"
                 type="text"
+                name='addUserName'
                 value={addUserName}
-                onChange={handleNameInput}
-            /> */}
-
-            <div className="App">{items}</div>
+                resetInputData={resetInputData}
+                handleFunction={(e) => setAddUserName(e.target.value)}
+                className="test_input"
+            />
+            <button onClick={resetData}>
+                Delete all
+            </button>
+        </div>
+        <div className="App" onClick={handleClick}>{items}</div>
         </>
     );
 }
 
 export default App;
-
-// const addNameToTemplates = (e) => {
-//   const value = e.target.value;
-
-//   if (value === "") {
-//       resetCardsData();
-//       setAddUserName("");
-//       return;
-//   }
-//   setAddUserName(value)
-//   resetCardsData();
-
-//   const updateArray = templateModeration.map((item) => {
-//       const newArr = item.template.map(
-//           (i) => `${value}, ${i[0].toLocaleLowerCase() + i.slice(1, -1)}`
-//       );
-
-//       return {
-//           title: item.title,
-//           template: newArr,
-//       };
-//   });
-
-//   // setAddUserName(value);
-//   updateData(updateArray);
-// };

@@ -1,23 +1,32 @@
 import React from 'react';
 import './moderationList.css'
 
+const emojiArray = "📚,  🔔,  🧩, ⏰, 💡, 🔧, ⚙️, 📩, 📪, 🗓, 📍, 📌, 🔍, ❗️, ⬇️, 📢, 📑, 📨, 📃, 📣, ':yt:', ':buffering:'";
+
 const ModerationList = (props) => {
-    const {title, data} = props;
+    const {title, data, value} = props;
 
-    const handleClick = (e) => {
-        const element = e.target.closest('li');
-        navigator.clipboard.writeText(element.innerText);
-    }
-
-    const renderItems = (arr) => {
-        const items = arr.map((text, index) => (
-            <li key={index}
-                className='card'
-                onClick={handleClick}>
-                {text}
+    const renderItems = (arr) => {  
+        const items = data.map((item) => {
+            let str = null;
+            if (value !== '') {
+                let spliceStr = item.desc.split(' ').slice(1).join(' ').trim();
+                str = `${value}, ${spliceStr[0].toLowerCase()}${spliceStr.slice(1)}`;
+            } else {
+                str = item.desc;
+            }
+            // const str = value ? `${value}, ${item.desc[0].toLowerCase() + item.desc.slice(1)}` : item.desc;
+            return (
+                <li key={item.id}
+                className='card'>
+                    <div>
+                        {str}
+                    </div>
                 <br/>
-                <span>200/{text.length}</span>
-            </li>)
+                <span>{item.desc.length}/200</span>
+            </li>
+            )
+        }
         )
 
         return (
@@ -27,6 +36,7 @@ const ModerationList = (props) => {
             </ul>
         )
     }
+    
     const items = renderItems(data)
 
     return (

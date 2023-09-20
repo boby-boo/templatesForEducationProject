@@ -2,6 +2,14 @@
   display: flex;
   gap: 40px;
 }
+
 .test_input {
   margin: 50px;
+}
+
+.wrap {
+  margin: 60px;
+  width: 400px;
+  display: flex;
+  column-gap: 50px;
 }
