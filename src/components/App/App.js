@@ -4,7 +4,7 @@ import SearchPanel from "../SearchPanel/SearchPanel.js";
 
 import {templateModerationOfConference, templateModerationOfWebinar} from "../../templateModeration.js";
 
-import { FidgetSpinner, ProgressBar } from "react-loader-spinner";
+import { ProgressBar } from "react-loader-spinner";
 
 function App() {
     const [cards, setCards] = useState(JSON.parse(localStorage.getItem('data')) || null);
@@ -16,7 +16,6 @@ function App() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [idArr, setIdArr] = useState([]);
 
-    console.log(cards)
     const options = [
         {value: 1, label: 'Вебінар', isVisible: true},
         {value: 2, label: 'Конференція', isVisible: true},
@@ -33,7 +32,12 @@ function App() {
 
     const updateSelectedData = (value, label) => {
         setSelected({value, label})
+
         let data = null;
+    
+        setSearchText('')
+        setAddUserName('')
+
         switch (value) {
             case 1: 
                 data = templateModerationOfWebinar;
@@ -57,11 +61,11 @@ function App() {
 
         if (value === '') {
             setSearchText('')
-            updateData()
+            updateData(JSON.parse(localStorage.getItem('data')))
             return 
         }
 
-        const upData = filteredArray(cards, value);
+        const upData = filteredArray(JSON.parse(localStorage.getItem('data')), value);
 
         updateData([
             {
@@ -93,17 +97,28 @@ function App() {
     const resetData = () => {
         setSearchText('')
         setAddUserName('')
-        updateData()
+        updateData(JSON.parse(localStorage.getItem('data')));
     }
 
     const resetInputData = (value) => {
-        if (value === 'searchText') {
-            setSearchText('')
-            updateData()
-        } 
-        if (value === 'addUserName') {
-            setAddUserName('')
-        } 
+        switch (value) {
+            case 'searchText':
+                setSearchText('')
+                updateData(JSON.parse(localStorage.getItem('data')));
+                break;
+            case 'addUserName':
+                setAddUserName('');
+                break;
+            default:
+                break;
+        }
+        // if (value === 'searchText') {
+        //     setSearchText('')
+        //     updateData()
+        // } 
+        // if (value === 'addUserName') {
+        //     setAddUserName('')
+        // } 
     }
 
     const renderItems = (data, value) => {
@@ -121,27 +136,18 @@ function App() {
             return;
         }
     }
-    
-    if (cards === null) {
-        console.log(cards === null)
+
+    if (cards === 'null') {
         return (
-            <ProgressBar
-                height="80"
-                width="80"
-                ariaLabel="progress-bar-loading"
-                wrapperStyle={{}}
-                wrapperClass="progress-bar-wrapper"
-                borderColor = '#F4442E'
-                barColor = '#51E5FF'
-/>
+            <h1>jdjdj</h1>
         )
     }
-    
+
     const items = renderItems(cards, addUserName);
+    
     let style = {};
 
     if (items[0].props.title === 'Результат пошуку') {
-        console.log('Результат пошуку')
         style = {display: 'flex', justifyContent: 'center'}
     }
 
@@ -158,10 +164,28 @@ function App() {
                 options={options} 
                 updateSelectedData={updateSelectedData}
             />
+            {!cards && <Spinner/>}
+            <div className="cards__row" style={style} onClick={handleClick}>
+                {items}
+                {/* {cards.map((item, index) => <ModerationList value={addUserName} key={index} title={item.title} data={item.template}/>)} */}
 
-            <div className="cards__row" style={style} onClick={handleClick}>{items}</div>
+            </div>
         </>
     );
 }
 
+
+const Spinner = () => {
+    return (
+        <ProgressBar
+            height="80"
+            width="80"
+            ariaLabel="progress-bar-loading"
+            wrapperStyle={{}}
+            wrapperClass="progress-bar-wrapper"
+            borderColor = '#F4442E'
+            barColor = '#51E5FF'
+        />
+    )
+}
 export default App;
