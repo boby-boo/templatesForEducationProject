@@ -3,31 +3,25 @@ import { useEffect, useState } from "react";
 import SearchPanel from "../SearchPanel/SearchPanel.js";
 
 import {templateModerationOfConference, templateModerationOfWebinar} from "../../templateModeration.js";
-
-import { ProgressBar } from "react-loader-spinner";
+import Spinner from "../Spinner/Spinner";
 
 function App() {
-    const [cards, setCards] = useState(JSON.parse(localStorage.getItem('data')) || null);
-    const [selected, setSelected] = useState(JSON.parse(localStorage.getItem('selectedItem')) || {value: 0, label: 'Оберіть шаблон'});
-    
+    const [cards, setCards] = useState(JSON.parse(localStorage.getItem('data_template')) || null);
+    const [selected, setSelected] = useState(JSON.parse(localStorage.getItem('selected_item')) || {value: 0, label: 'Оберіть шаблон'});
+
     const [searchText, setSearchText] = useState('');
     const [addUserName, setAddUserName] = useState('');
-    
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [idArr, setIdArr] = useState([]);
+
+    const [isLoading, setIsLoading] = useState(cards ? false : true);
 
     const options = [
         {value: 1, label: 'Вебінар', isVisible: true},
         {value: 2, label: 'Конференція', isVisible: true},
     ]
 
-    useEffect(() => {
-        renderItems(cards, addUserName)
-    }, [addUserName])
-
-
-    const updateData = (arr=templateModerationOfWebinar) => {
+    const updateData = (arr) => {
         setCards(arr)
+        setIsLoading(false)
     }
 
     const updateSelectedData = (value, label) => {
@@ -50,22 +44,24 @@ function App() {
                 break;
         }
 
-        localStorage.setItem('selectedItem', JSON.stringify({value, label}))
-        localStorage.setItem('data', JSON.stringify(data))
+        localStorage.setItem('selected_item', JSON.stringify({value, label}))
+        localStorage.setItem('data_template', JSON.stringify(data))
         updateData(data)
     }
 
     const handleFilterInput = (e) => {
+        if (cards === null) return;
+
         const value = e.target.value;
         setSearchText(value);
 
         if (value === '') {
             setSearchText('')
-            updateData(JSON.parse(localStorage.getItem('data')))
+            updateData(JSON.parse(localStorage.getItem('data_template')))
             return 
         }
 
-        const upData = filteredArray(JSON.parse(localStorage.getItem('data')), value);
+        const upData = filteredArray(JSON.parse(localStorage.getItem('data_template')), value);
 
         updateData([
             {
@@ -76,6 +72,7 @@ function App() {
     }
 
     const handleAddUserInput = (e) => {
+        if (cards === null) return;
         setAddUserName(e.target.value)
     }
 
@@ -97,14 +94,14 @@ function App() {
     const resetData = () => {
         setSearchText('')
         setAddUserName('')
-        updateData(JSON.parse(localStorage.getItem('data')));
+        updateData(JSON.parse(localStorage.getItem('data_template')));
     }
 
     const resetInputData = (value) => {
         switch (value) {
             case 'searchText':
                 setSearchText('')
-                updateData(JSON.parse(localStorage.getItem('data')));
+                updateData(JSON.parse(localStorage.getItem('data_template')));
                 break;
             case 'addUserName':
                 setAddUserName('');
@@ -112,18 +109,7 @@ function App() {
             default:
                 break;
         }
-        // if (value === 'searchText') {
-        //     setSearchText('')
-        //     updateData()
-        // } 
-        // if (value === 'addUserName') {
-        //     setAddUserName('')
-        // } 
     }
-
-    const renderItems = (data, value) => {
-        return data.map((item, index) => <ModerationList value={value} key={index} title={item.title} data={item.template}/>)
-    };
 
     const handleClick = (e) => {
         if (e.target.tagName === 'LI') {
@@ -131,25 +117,17 @@ function App() {
             return;
         } 
         if (e.target.tagName === 'DIV') {
-            console.log('DIV')
             navigator.clipboard.writeText(e.target.textContent);
             return;
         }
     }
 
-    if (cards === 'null') {
-        return (
-            <h1>jdjdj</h1>
-        )
-    }
+    let style = cards && cards[0].title === 'Результат пошуку'? {display: 'flex', justifyContent: 'center'} : null;
 
-    const items = renderItems(cards, addUserName);
-    
-    let style = {};
-
-    if (items[0].props.title === 'Результат пошуку') {
-        style = {display: 'flex', justifyContent: 'center'}
-    }
+    let content = 
+    <div className="cards__row" style={style} onClick={handleClick}>
+        {cards ? cards.map((item, index) => <ModerationList value={addUserName} key={index} title={item.title}  data={item.template}/>) : null};
+    </div>
 
     return (
         <>
@@ -164,28 +142,9 @@ function App() {
                 options={options} 
                 updateSelectedData={updateSelectedData}
             />
-            {!cards && <Spinner/>}
-            <div className="cards__row" style={style} onClick={handleClick}>
-                {items}
-                {/* {cards.map((item, index) => <ModerationList value={addUserName} key={index} title={item.title} data={item.template}/>)} */}
-
-            </div>
+            {isLoading ? <Spinner width='120' height='120' text="Оберіть шаблон для того, аби розпочати роботу"/> : content}
         </>
     );
 }
 
-
-const Spinner = () => {
-    return (
-        <ProgressBar
-            height="80"
-            width="80"
-            ariaLabel="progress-bar-loading"
-            wrapperStyle={{}}
-            wrapperClass="progress-bar-wrapper"
-            borderColor = '#F4442E'
-            barColor = '#51E5FF'
-        />
-    )
-}
 export default App;

@@ -1,13 +1,17 @@
 import React from 'react';
+import Spinner from '../Spinner/Spinner';
 
 const ModerationList = (props) => {
     const {title, data, value} = props;
-
+    
     const renderItems = (arr) => { 
-
         if (arr.length === 0) {
             return (
-                <li>Sory</li>
+                <Spinner 
+                    width='120'
+                    height='120' 
+                    text="За вашим запитом нічого не знайдено"
+                />
             )
         }
 
@@ -24,19 +28,18 @@ const ModerationList = (props) => {
             }
             return (
                 <li key={item.id}
-                    className={`card ${style}`}
-                    >
+                className={`card ${style}`}>
                     <div>
                         {str}
                     </div>
-                <br/>
-                <span className={style}>{str.length}/200</span>
+                    <br/>
+                    <span className={style}>{str.length}/200</span>
                 </li>
             )
         }
         )
         return (
-            <div className='card__wrapper'>
+            <div className='card__wrapper' >
                 <h2 className='cards__header'>{title}</h2>
                 <ul className='cards__list'>
                     {items}
