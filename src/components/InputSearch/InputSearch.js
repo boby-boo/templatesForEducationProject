@@ -2,6 +2,7 @@ import React from 'react';
 
 const InputSearch = ({value, text, resetInputData, handleFunction, name, icon}) => {
     const isActive = value ? 'input__active' : null
+
     return (
         <div className='input__wrapper'>
             <>
