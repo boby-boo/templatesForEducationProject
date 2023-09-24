@@ -1,6 +1,8 @@
 import React from 'react';
 import Spinner from '../Spinner/Spinner';
 
+import './moderationList.scss';
+
 const ModerationList = (props) => {
     const {title, data, value} = props;
     

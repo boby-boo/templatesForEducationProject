@@ -1,8 +1,9 @@
 import React from 'react';
 import { MagnifyingGlass } from "react-loader-spinner";
 
-const Spinner = ({text, width, height}) => {
+import './spinner.scss';
 
+const Spinner = ({text, width, height}) => {
     return (
         <div className="spinner">
             <h2>{text}</h2>

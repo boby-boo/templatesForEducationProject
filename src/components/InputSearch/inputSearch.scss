@@ -1,0 +1,44 @@
+@import '../../style/variables.scss';
+
+.input__wrapper {
+    max-width: 350px;
+    width: 100%;
+    display: flex;
+}
+
+.panel__input {
+    max-width: 300px;
+    width: 100%;
+    padding: 12px 12px 12px 60px;
+    color: $blackColor;
+    background-color: $lightColor;
+    border-radius: 5px;
+    border: none;
+    @include templateTransition(all);
+    &:focus {
+        box-shadow: 0px 4px 6px 3px #2d53db1a;
+        background-color: #e5f1f8e6;
+        border: none;
+        outline: none;
+    }
+    &:hover {
+        background-color: transparentize(#e5f1f8e6, .11);
+    }
+    &_button {
+        width: 30px;
+        border-radius: 0 5px 5px 0;
+        background: #df6d6d url(../../assets/closeIcon.svg) center center / 30px 30px no-repeat;
+    }
+}
+
+.input__active {
+    border-radius: 5px 0 0 5px;
+}
+
+.input__search  {
+    background: $lightColor url(../../assets/searchIcon.svg) 10px center / 20px 20px no-repeat;
+}
+
+.input__user  {
+    background: $lightColor url(../../assets/userIcon.svg) 10px center / 20px 20px no-repeat;
+}

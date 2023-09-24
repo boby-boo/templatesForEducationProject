@@ -1,0 +1,39 @@
+@import '../../style/variables.scss';
+
+.search__panel_wrapper {
+    position: fixed;
+    top: 0;
+    right: 50%;
+    width: 100%;
+    transform: translateX(50%);
+    padding: 40px 0;
+    background-color: $lightBlue;
+    box-shadow: 1px 1px 4px 1px $mainColor;
+    @include templateFlex(center, center);
+    column-gap: 40px;
+    z-index: 99;
+}
+
+.search__panel {
+    width: 900px;
+    &_button {
+        min-width: 200px;
+        min-height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $lightColor;
+        font-weight: 600;
+        letter-spacing: 1px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        position: relative;
+        &:active {
+            top: 1px;
+            background-color: transparentize($hoverColor, .5);
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}

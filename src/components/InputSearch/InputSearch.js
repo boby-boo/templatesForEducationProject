@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './inputSearch.scss';
+
 const InputSearch = ({value, text, resetInputData, handleFunction, name, icon}) => {
     const isActive = value ? 'input__active' : null
 

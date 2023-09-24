@@ -3,10 +3,8 @@
 
 body {
     width: 100%;
-    // background-color: $lightBlue;
     font-family: 'Open Sans', sans-serif;
     color: $mainColor;
-    // background-color: #dfdfdf;
     background-color: transparentize(blue, 0.6);
     font-size: 16px;
 }
@@ -31,109 +29,14 @@ body {
     display: none;
 }
 
-::-webkit-scrollbar-corner {
-    // width: 0;
-}
-
 .button {
     background-color: #df6d6d;
     border: none;
     cursor: pointer;
-    transition: background-color .3s ease;
+    @include templateTransition(background-color);
     &:hover {
         background-color: $hoverColor;
     }
-}
-
-.search__panel_wrapper {
-    position: fixed;
-    top: 0;
-    right: 50%;
-    width: 100%;
-    transform: translateX(50%);
-    padding: 40px 0;
-    background-color: $lightBlue;
-    box-shadow: 1px 1px 4px 1px $mainColor;
-    @include templateFlex(center, center);
-    column-gap: 40px;
-    z-index: 99;
-}
-
-.search__panel {
-    width: 900px;
-    &_button {
-        min-width: 200px;
-        min-height: 45px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: $lightColor;
-        font-weight: 600;
-        letter-spacing: 1px;
-        border-radius: 5px;
-        text-transform: uppercase;
-        position: relative;
-
-        &:active {
-            top: 1px;
-            background-color: transparentize($hoverColor, 0.5);
-        }
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-}
-
-.long__template {
-    color: #df6d6d;
-}
-
-.input__wrapper {
-    max-width: 350px;
-    width: 100%;
-    display: flex;
-}
-
-.panel__input {
-    max-width: 300px;
-    width: 100%;
-    padding: 12px 12px 12px 60px;
-    color: $blackColor;
-    background-color: $lightColor;
-    border-radius: 5px;
-    border: none;
-    transition: all .3s ease;
-
-    &:focus {
-        box-shadow: 0px 4px 6px 3px #2d53db1a;
-        background-color: #e5f1f8e6;
-        border: none;
-        outline: none;
-    }
-
-    &:hover {
-        background-color: transparentize(#e5f1f8e6, 0.11);
-    }
-
-    &_button {
-        width: 30px;
-        border-radius: 0 5px 5px 0;
-        background: #df6d6d url(../assets/closeIcon.svg) center center / 30px 30px no-repeat;
-    }
-}
-
-.input__active {
-    border-radius: 5px 0 0 5px;
-}
-
-.input__search  {
-    background: $lightColor url(../assets/searchIcon.svg) 10px center / 20px 20px no-repeat;
-}
-
-.input__user  {
-    background: $lightColor url(../assets/userIcon.svg) 10px center / 20px 20px no-repeat;
 }
 
 .cards__row {
@@ -143,65 +46,12 @@ body {
     gap: 25px;
 }
 
-.card__wrapper {
-    // height: 100vh;
-    padding-bottom: 20px;
-    background-color: transparentize($lightColor, 0.6);
-    border-radius: 10px;
-
-    .cards__header {
-        padding: 20px 5px 40px;
-        border-radius: 5px 5px 0 0;
-        text-align: center;
-        font-weight: 400;
-        font-size: 20px;
-    }
-
-    .cards__list {
-        padding: 0 20px;
-        height: 63vh;
-        @include templateFlex(flex-start, center);
-        flex-direction: column;
-        row-gap: 10px;
-        overflow-y: auto;
-        word-wrap: break-word;
-        border-radius: 10px;
-    
-        .card {
-            width: 320px;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: transparentize($lightColor, 0.2);
-            box-shadow:  0 2px 3px $lightBlue, 0 0 4px $mainColor;
-            @include templateTransition(background-color);
-            cursor: pointer;
-    
-            &:hover {
-                background-color: transparentize($lightColor, 0.05)
-            }
-    
-            &:active {
-                background-color: transparentize($lightColor, 0.2);
-                box-shadow: 0px 4px 6px 3px #2d53db1a;
-            }
-    
-            span {
-                display: block;
-                max-width: 80px;
-                margin-left: auto;
-                font-style: italic;
-            }
-        }
-    }
-}
-
 @media(max-width: 900px){
     .search__panel_wrapper {
         flex-direction: column;
         row-gap: 20px;
         padding: 10px 0;
     }
-
     .cards__row {
         align-items: center;
         flex-direction: column;
@@ -212,86 +62,4 @@ body {
     .cards__row {
         justify-content: center;
     }
-}
-
-.spinner {
-    max-width: 1000px;
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    @include templateFlex(center, center);
-    flex-direction: column;
-    row-gap: 50px;
-    color: transparentize($lightColor, .2);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.select__row {
-    max-width: 150px;
-    width: 100%;
-    margin-right: 30px;
-    font-size: 12px;
-    font-weight: 500;
-    background-color: $lightColor;
-    border-radius: 5px;
-    cursor: pointer;
-    // box-shadow: 0px 4px 6px 3px transparentize($hoverColor, .8);
-    
-    &_header {
-        position: relative;
-        padding: 10px;
-        z-index: 111;
-
-        h3 {
-            font-weight: 600;
-            text-align: center;
-            text-transform: uppercase;
-        }
-    
-    }
-    li {
-        display: block;
-        padding: 10px;
-        cursor: pointer;
-        transition: all .3s ease;
-    }
-
-    li:hover {
-        color: $lightColor;
-        background-color: #df6d6d;
-    }
-}
-
-.select__row_list,
-.select__row_list_active {
-    position: absolute;
-    top: 0;
-    max-width: 150px;
-    width: 100%;
-    transform: translateY(-60%);
-    text-transform: uppercase;
-    text-align: center;
-    background-color: $lightColor;
-    border-radius: 0 0 5px 5px;
-    row-gap: 5px;
-    border-top: 1px solid transparentize($hoverColor, .4);
-    transition: all .3s ease;
-}
-
-.select__row_list {
-    opacity: 0;
-    height: 0;
-    top: 50%;
-    visibility: hidden;
-    transition: all .3s ease;
-}
-
-.select__row_list_active {
-    height: 73px;
-    opacity: 1;
-    top: 100%;
-    visibility: visible;
 }

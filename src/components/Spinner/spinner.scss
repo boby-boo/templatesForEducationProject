@@ -1,0 +1,16 @@
+@import '../../style/variables.scss';
+
+.spinner {
+    max-width: 1000px;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @include templateFlex(center, center);
+    flex-direction: column;
+    row-gap: 50px;
+    color: transparentize($lightColor, .2);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}

@@ -1,0 +1,81 @@
+@import '../../style/variables.scss';
+
+.select__row {
+    max-width: 150px;
+    width: 100%;
+    margin-right: 30px;
+    font-size: 12px;
+    font-weight: 500;
+    background-color: $lightColor;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    z-index: 111;
+    &_header {
+        position: relative;
+        padding: 10px;
+        z-index: 111;
+        @include templateTransition(all);
+        &:hover {
+            border-radius: 5px 5px 0 0;
+            background-color: transparentize($hoverColor, .8);
+        }
+        h3 {
+            font-weight: 600;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+    li:last-child {
+        border-radius: 0 0 5px 5px;
+    }
+    li {
+        display: block;
+        padding: 10px;
+        cursor: pointer;
+        @include templateTransition(all);
+    }
+    li:hover {
+        color: $lightColor;
+        background-color: #df6d6d;
+    }
+    &_window {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: transparentize($blackColor, 1);
+        z-index: 101;
+    }
+}
+
+.select__row_list,
+.select__row_list_active {
+    position: absolute;
+    top: 0;
+    max-width: 150px;
+    width: 100%;
+    transform: translateY(-60%);
+    text-transform: uppercase;
+    text-align: center;
+    background-color: $lightColor;
+    border-radius: 0 0 5px 5px;
+    row-gap: 5px;
+    border-top: 1px solid transparentize($hoverColor, .4);
+    @include templateTransition(all)
+}
+
+.select__row_list {
+    opacity: 0;
+    height: 0;
+    top: 50%;
+    visibility: hidden;
+    @include templateTransition(all);
+}
+
+.select__row_list_active {
+    height: 72px;
+    opacity: 1;
+    top: 100%;
+    visibility: visible;
+}
