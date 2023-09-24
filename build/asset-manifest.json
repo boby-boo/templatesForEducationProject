@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.c1641ca7.css",
-    "main.js": "/static/js/main.a722f3a3.js",
-    "static/media/userIcon.svg": "/static/media/userIcon.497c7d0e78ad5ae8a8f2.svg",
-    "static/media/closeIcon.svg": "/static/media/closeIcon.0bfe40d3a43f2f218c7b.svg",
-    "static/media/searchIcon.svg": "/static/media/searchIcon.7e823e7abdc73aafcf56.svg",
-    "index.html": "/index.html",
-    "main.c1641ca7.css.map": "/static/css/main.c1641ca7.css.map",
-    "main.a722f3a3.js.map": "/static/js/main.a722f3a3.js.map"
+    "main.css": "/templatesForEducationProject/static/css/main.b2d55c96.css",
+    "main.js": "/templatesForEducationProject/static/js/main.59057478.js",
+    "static/media/userIcon.svg": "/templatesForEducationProject/static/media/userIcon.497c7d0e78ad5ae8a8f2.svg",
+    "static/media/closeIcon.svg": "/templatesForEducationProject/static/media/closeIcon.0bfe40d3a43f2f218c7b.svg",
+    "static/media/searchIcon.svg": "/templatesForEducationProject/static/media/searchIcon.7e823e7abdc73aafcf56.svg",
+    "index.html": "/templatesForEducationProject/index.html",
+    "main.b2d55c96.css.map": "/templatesForEducationProject/static/css/main.b2d55c96.css.map",
+    "main.59057478.js.map": "/templatesForEducationProject/static/js/main.59057478.js.map"
   },
   "entrypoints": [
-    "static/css/main.c1641ca7.css",
-    "static/js/main.a722f3a3.js"
+    "static/css/main.b2d55c96.css",
+    "static/js/main.59057478.js"
   ]
 }
