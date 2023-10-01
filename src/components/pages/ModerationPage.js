@@ -1,5 +1,5 @@
 import React from 'react';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import {templateModerationOfConference, templateModerationOfWebinar} from "../../templateModeration.js";
 import ModerationList from "../ModerationList/ModerationList";
@@ -20,7 +20,7 @@ const ModerationPage = () => {
         {value: 2, label: 'Конференція', isVisible: true},
     ]
 
-    const updateData = (arr) => {
+    const updateData = (arr=JSON.parse(localStorage.getItem('data_template'))) => {
         setCards(arr)
         setIsLoading(false)
     }
@@ -58,7 +58,7 @@ const ModerationPage = () => {
 
         if (value === '') {
             setSearchText('')
-            updateData(JSON.parse(localStorage.getItem('data_template')))
+            updateData()
             return 
         }
 
@@ -95,14 +95,14 @@ const ModerationPage = () => {
     const resetData = () => {
         setSearchText('')
         setAddUserName('')
-        updateData(JSON.parse(localStorage.getItem('data_template')));
+        updateData();
     }
 
     const resetInputData = (value) => {
         switch (value) {
             case 'searchText':
                 setSearchText('')
-                updateData(JSON.parse(localStorage.getItem('data_template')));
+                updateData();
                 break;
             case 'addUserName':
                 setAddUserName('');
@@ -115,10 +115,16 @@ const ModerationPage = () => {
     const handleClick = (e) => {
         if (e.target.tagName === 'LI') {
             navigator.clipboard.writeText(e.target.childNodes[0].textContent);
+            if (searchText) {
+                resetData()
+            }
             return;
         } 
         if (e.target.tagName === 'DIV') {
             navigator.clipboard.writeText(e.target.textContent);
+            if (searchText) {
+                resetData()
+            }
             return;
         }
     }
@@ -126,9 +132,9 @@ const ModerationPage = () => {
     let style = cards && cards[0].title === 'Результат пошуку'? {display: 'flex', justifyContent: 'center'} : null;
 
     let content = 
-    <div className="cards__row" style={style} onClick={handleClick}>
+    <ul className="cards__row" style={style} onClick={handleClick}>
         {cards ? cards.map((item, index) => <ModerationList value={addUserName} key={index} title={item.title}  data={item.template}/>) : null};
-    </div>
+    </ul>
 
     return (
         <>

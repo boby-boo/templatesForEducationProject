@@ -8,7 +8,7 @@ const SearchPanel = (props) => {
     const {searchText, addUserName, handleFilterInput, resetInputData, handleAddUserInput, resetData, selected, options, updateSelectedData} = props;
 
     return (
-        <section className="search__panel">
+        <header className="search__panel">
             <div className='search__panel_wrapper'>
                 <FilterOfSelect selected={selected} options={options} updateSelectedData={updateSelectedData}/>
                 <InputSearch
@@ -33,7 +33,7 @@ const SearchPanel = (props) => {
                     Видалити все
                 </button>
             </div>
-        </section>
+        </header>
     );
 };
 

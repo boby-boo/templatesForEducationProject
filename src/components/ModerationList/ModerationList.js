@@ -41,12 +41,12 @@ const ModerationList = (props) => {
         }
         )
         return (
-            <div className='card__wrapper' >
+            <li className='card__wrapper' >
                 <h2 className='cards__header'>{title}</h2>
                 <ul className='cards__list'>
                     {items}
                 </ul>
-            </div>
+            </li>
         )
     }
     
