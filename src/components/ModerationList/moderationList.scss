@@ -1,15 +1,15 @@
 @import '../../style/variables.scss';
 
 .card__wrapper {
-    padding-bottom: 20px;
+    padding-bottom: 30px;
     background-color: transparentize($lightColor, .6);
     border-radius: 10px;
     .cards__header {
-        padding: 20px 5px 40px;
+        padding: 20px 5px 20px;
         border-radius: 5px 5px 0 0;
         text-align: center;
         font-weight: 400;
-        font-size: 20px;
+        font-size: 18px;
     }
     .cards__list {
         padding: 0 20px;
@@ -21,15 +21,15 @@
         word-wrap: break-word;
         border-radius: 10px;
         .card {
-            width: 320px;
+            width: 290px;
             padding: 10px;
             border-radius: 5px;
-            background-color: transparentize($lightColor, .2);
+            background-color: $lightColor;
             box-shadow:  0 2px 3px $lightBlue, 0 0 4px $mainColor;
             @include templateTransition(background-color);
             cursor: pointer;
             &:hover {
-                background-color: transparentize($lightColor, .05)
+                background-color: transparentize($lightColor, .3);
             }
             &:active {
                 background-color: transparentize($lightColor, 0.2);

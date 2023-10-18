@@ -6,18 +6,17 @@ body {
     font-family: 'Open Sans', sans-serif;
     color: $mainColor;
     background-color: #7faaffb3;
-    // background-color: transparentize(blue, 0.6);
-    font-size: 16px;
+    font-size: 14px;
 }
 
 ::-webkit-scrollbar {
     width: 10px;
-    background: transparentize($mainColor, 0.4);
+    background: transparentize($lightColor, 1);
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: transparentize($lightBlue, .4);
+    background: transparentize($lightColor, .8);
     border-radius: 5px;
 }
 
