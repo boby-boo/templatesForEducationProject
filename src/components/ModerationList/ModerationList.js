@@ -1,6 +1,8 @@
 import React from 'react';
 import Spinner from '../Spinner/Spinner';
 
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 import './moderationList.scss';
 
 const ModerationList = (props) => {
@@ -26,27 +28,30 @@ const ModerationList = (props) => {
                 str = `${value}, ${spliceStr[0].toLowerCase()}${spliceStr.slice(1)}`;
                 style = str.length > 200 ? 'long__template' : '';
             } else {
-                str = item.desc;
+                str = item.desc
             }
             return (
-                <li key={item.id}
-                className={`card ${style}`}>
-                    <div>
-                        {str}
-                    </div>
-                    <br/>
-                    <span className={style}>{str.length}/200</span>
-                </li>
+                <CSSTransition key={item.id} timeout={300} classNames='card'>
+                    <li key={item.id} className={`card ${style}`}>
+                        <div>
+                            {str}
+                        </div>
+                        <br/>
+                        <span className={style}>{str.length}/200</span>
+                    </li>
+                </CSSTransition>
             )
         }
         )
         return (
-            <li className='card__wrapper' >
-                <h2 className='cards__header'>{title}</h2>
-                <ul className='cards__list'>
-                    {items}
-                </ul>
-            </li>
+                <li className='card__wrapper'>
+                    <h2 className='cards__header'>{title}</h2>
+                    <TransitionGroup component='ul' className='cards__list'>
+                        {items}
+                    </TransitionGroup>
+                    {/* <ul className='cards__list'> */}
+                    {/* </ul> */}
+                </li>
         )
     }
     
@@ -56,7 +61,7 @@ const ModerationList = (props) => {
         <>
             {items}
         </>
-    );
+    )
 };
 
 export default ModerationList;

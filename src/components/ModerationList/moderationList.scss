@@ -41,6 +41,20 @@
                 margin-left: auto;
                 font-style: italic;
             }
+            &-enter {
+                opacity: 0;
+            }
+            &-enter-active {
+                opacity: 1;
+                transition: opacity 300ms ease;
+            }
+            &-exit {
+                opacity: 1;
+            }
+            &-exit-active {
+                opacity: 1;
+                transition: opacity 300ms ease;
+            }
         }
     }
 };
@@ -48,3 +62,4 @@
 .long__template {
     color: #df6d6d;
 };
+

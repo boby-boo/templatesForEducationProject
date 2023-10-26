@@ -40,7 +40,7 @@ export const templateModerationOfConference = [
             },
             {
                 id: 15,
-                desc: ":yt: Не пропустіть нові відео! Підписуйтесь на наш YouTube-канал за посиланням: https://www.youtube.com/channel/UCMCYaKTwZ1Olw1fuzLvgA_Q?sub_confirmation=1",
+                desc: ":yt: Не пропустіть нові відео! Підписуйтесь на наш YouTube-канал за посиланням: https://www.youtube.com/@NaurokComUa",
             },
             {
                 id: 16,
@@ -268,7 +268,7 @@ export const templateModerationOfWebinar = [
             },
             {
                 id: 15,
-                desc: ":yt: Не пропустіть нові відео! Підписуйтесь на наш YouTube-канал за посиланням: https://www.youtube.com/channel/UCMCYaKTwZ1Olw1fuzLvgA_Q?sub_confirmation=1",
+                desc: ":yt: Не пропустіть нові відео! Підписуйтесь на наш YouTube-канал за посиланням: https://www.youtube.com/@NaurokComUa",
             },
             {
                 id: 16,

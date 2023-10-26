@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from "react";
 
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 import {templateModerationOfConference, templateModerationOfWebinar} from "../../templateModeration.js";
 import ModerationList from "../ModerationList/ModerationList";
 import SearchPanel from "../SearchPanel/SearchPanel.js";
@@ -129,12 +131,34 @@ const ModerationPage = () => {
         }
     }
 
-    let style = cards && cards[0].title === 'Результат пошуку'? {display: 'flex', justifyContent: 'center'} : null;
+    const style = cards && cards[0].title === 'Результат пошуку'? {display: 'flex', justifyContent: 'center'} : null;
 
-    let content = 
-    <ul className="cards__row" style={style} onClick={handleClick}>
-        {cards ? cards.map((item, index) => <ModerationList value={addUserName} key={index} title={item.title}  data={item.template}/>) : null};
-    </ul>
+    const renderList = (data) => {
+
+        const list = data.map((item, index) => {
+            return (
+                <CSSTransition timeout={200} classNames='cards__row'  key={index}>
+                    <ModerationList 
+                        value={addUserName} 
+                        key={index} title={item.title} 
+                        data={item.template}
+                    />
+                </CSSTransition>
+            )
+        })
+
+        return (
+            <TransitionGroup 
+                component="ul"
+                className="cards__row" 
+                style={style} 
+                onClick={handleClick}>
+                {list}
+            </TransitionGroup> 
+        )
+    }
+    
+    const content = cards ? renderList(cards) : null;
 
     return (
         <>
