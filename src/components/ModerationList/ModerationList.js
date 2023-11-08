@@ -49,8 +49,6 @@ const ModerationList = (props) => {
                     <TransitionGroup component='ul' className='cards__list'>
                         {items}
                     </TransitionGroup>
-                    {/* <ul className='cards__list'> */}
-                    {/* </ul> */}
                 </li>
         )
     }
