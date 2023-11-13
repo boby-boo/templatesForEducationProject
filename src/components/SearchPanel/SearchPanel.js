@@ -1,6 +1,7 @@
 import React from 'react';
 import InputSearch from "../InputSearch/InputSearch.js";
 import FilterOfSelect from '../FilterOfSelect/FilterOfSelect.js';
+import Notations from '../Notations/Notations.js';
 
 import './searchPanel.scss';
 
@@ -10,6 +11,7 @@ const SearchPanel = (props) => {
     return (
         <header className="search__panel">
             <div className='search__panel_wrapper'>
+                <Notations />
                 <FilterOfSelect selected={selected} options={options} updateSelectedData={updateSelectedData}/>
                 <InputSearch
                     icon='search'
