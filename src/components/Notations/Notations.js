@@ -1,14 +1,16 @@
 import { useState } from 'react';
-
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuid4 } from 'uuid';
+import { useDispatch } from 'react-redux';
+import {updateState} from '../redux/actions';
 
 import './notations.scss';
 
 const Notations = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState('');
-    const [templateArray, setTemplateArray] = useState(JSON.parse(localStorage.getItem('notations')) || []);
+
+    const dispatch = useDispatch();
 
     const openModal = () => {
         setIsOpen(true)
@@ -23,23 +25,15 @@ const Notations = () => {
         setText(e.target.value)
     }
 
-    const updateLocalStorage = (data) => {
-        localStorage.setItem('notations', JSON.stringify(data));
-        setTemplateArray(data)
-    }
-
-    const saveTemplate = (e) => {
+    const updateNotation = (e) => {
         e.preventDefault();
 
-        const template = {
+        const notation = {
             id: uuid4(),
             length: text.length,
             text
         }
-
-        const updateData = [...templateArray, template];
-        
-        updateLocalStorage(updateData);
+        dispatch(updateState(notation));
         setText('');
         setIsOpen(false);
     }
@@ -52,7 +46,7 @@ const Notations = () => {
                 <ModalNotation
                     text={text}
                     isOpen={isOpen}
-                    saveTemplate={saveTemplate}
+                    updateNotation={updateNotation}
                     changeTextareaValue={changeTextareaValue}
                     closeModal={closeModal}
                 />
@@ -62,7 +56,7 @@ const Notations = () => {
 };
 
 const ModalNotation = (props) => {
-    const {saveTemplate, changeTextareaValue, closeModal, text, isOpen} = props;
+    const {updateNotation, changeTextareaValue, closeModal, text, isOpen} = props;
 
     let style = text.length > 200 ? 'long__template' : ''; 
 
@@ -74,8 +68,8 @@ const ModalNotation = (props) => {
             mountOnEnter
             unmountOnExit>
             <>
-                <form 
-                    onSubmit={saveTemplate}
+                <form
+                    onSubmit={updateNotation}
                     className="notation__window"
                 >
                     <h2>Введіть текст, який необхідно зберігти</h2>

@@ -1,6 +1,16 @@
 @import './variables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&family=Oswald:wght@400;500;600&display=swap');
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul,li {
+    list-style: none;
+}
+
 body {
     width: 100%;
     font-family: 'Open Sans', sans-serif;

@@ -1,32 +1,32 @@
-import { useEffect, useState } from 'react';
-import './notationSpanel.scss';
 import ModerationList from '../ModerationList/ModerationList';
 
+import './notationsPanel.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { filteredState } from '../redux/actions';
+import { useState } from 'react';
+
 const NotationsPanel = () => {
-    const [notations, setNotations] = useState(null);
-    
-    useEffect(() => {
-        setNotations(getLocalStorage())
-    }, [])
+    const [isVisible, setIsVisible] = useState(false);
+    const notationsData = useSelector(state => state.notations);
+
+    const dispatch = useDispatch();
 
     const filteredData = (id) => {
-        const data = notations.filter(item => item.id !== id);
+        dispatch(filteredState(id))
+    };
 
-        setNotations(data);
-        localStorage.setItem('notations', JSON.stringify(data));
+    const showModal = () => {
+        setIsVisible(!isVisible)
     }
 
-    const getLocalStorage = () => {
-        return JSON.parse(localStorage.getItem('notations')) || []
-    }
-
-    const renderItems = () => {
+    const renderItems = (notations) => {
         return (
             <>
                 <ModerationList 
                     title='Збережені нотатки' 
                     data={notations} 
                     value=''
+                    showModal={showModal}
                     filteredData={filteredData}
                     isNotation='true'
                 />
@@ -35,27 +35,39 @@ const NotationsPanel = () => {
         )
     }
 
-    if (!notations || notations.length === 0 ) {
+    if (!notationsData || notationsData.length === 0) {
         return (
-            <>
-                <h1>kd</h1>
-            </>
+            <></>
         )
     }
 
-    const content = renderItems(notations);
+    const content = renderItems(notationsData);
 
     return (
         <>
-            <div className="notations-panel">
-            {/* <button onClick={() => setIsVisible(!isVisible)}className='notations-panel__button'>
-                button
-            </button> */}
-                <ul className="notations-panel__row">
-                    {content}
-                </ul>
-            </div>
-            {/* <div onClick={() => setIsVisible(false)}className="overlay__light"></div> */}
+            {notationsData.length !== 0 &&
+                <button 
+                    className='notations__button'
+                    onClick={showModal}
+                    >
+                    button
+                </button>
+            }
+            {isVisible && 
+                <>
+                    <div className="notations-panel">
+                    <button
+                        onClick={showModal} 
+                        className='notations__button_panel'>
+                        button
+                    </button>
+                            <div className="notations-panel__row visible-panel">
+                                {content}
+                            </div>
+                    </div>
+                    <div onClick={() => setIsVisible(false)} className="overlay__light"></div>
+                </>
+            }
 
         </>
     );

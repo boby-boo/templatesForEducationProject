@@ -88,14 +88,13 @@ const ModerationList = (props) => {
             )
         }
         )
-
         return (
-                <li className='card__wrapper'>
+                <div className='card__wrapper'>
                     <h2 className='cards__header'>{title}</h2>
                     <TransitionGroup component='ul' className='cards__list'>
                         {items}
                     </TransitionGroup>
-                </li>
+                </div>
         )
     }
 

@@ -5,7 +5,7 @@
     position: fixed;
     height: 100%;
     top: 0;
-    left: 0;
+    left: -100%;
     padding-right: 10px;
     display: flex;
     align-items: center;
@@ -13,14 +13,33 @@
     // background-color: #7faaffb3;
     border-radius: 0 50px 50px 0;
     z-index: 121;
-    &__button {
-        position: absolute;
-        top: 20%;
-        right: -40px;
-    }
     &__card {
         @extend .main-card;
     }
+}
+.visible-panel {
+    @extend .notations-panel;
+    left: 0;
+}
+
+.notations__button {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    background-color: red;
+    &_panel {
+        // @extend .notations__button;
+        // position: absolute;
+        width: 40px;
+        height: 40px;
+        left: 500px;
+        // left: 290px;
+        background-color: green;
+        z-index: 211;
+    }
+    // z-index: 100;
+    // top: 0;
+    // left: 0;
 }
 
 // .notations-panel__button {
