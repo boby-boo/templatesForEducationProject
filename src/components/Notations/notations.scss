@@ -1,30 +1,77 @@
 @import '../../style/variables.scss';
 
-.notation__button {
-    max-width: 40px;
-    width: 100%;
-    height: 40px;
-    border-radius: 50%;
-    background: url(../../assets/plusIcon.svg) center center / 25px no-repeat ;
+.notation {
+    &__window {
+        position: absolute;
+        top: -50%;
+        left: 50%;
+        transform: translate(-50%, 50%);
+        padding: 20px;
+        width: 400px;
+        height: 400px;
+        @include templateFlex(space-evenly, center);
+        flex-direction: column;
+        z-index: 121;
+        background-color: #fff;
+        border-radius: 10px;
+        h2 {
+            text-align: center;
+            font-weight: 500;
+            line-height: 1.5;
+            text-transform: uppercase;
+        }
+        textarea {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            padding: 20px;
+            font-size: 16px;
+            line-height: 1.2;
+            font-family: "Open Sans", sans-serif;
+            color: #878787;
+            resize: none;
+            border-radius: 10px;
+            outline: none;
+            border: 1px solid $lightBlue;
+            @include templateTransition(box-shadow);
+            &:focus {
+                box-shadow: 0 2px 3px $lightBlue, 0 0 4px $mainColor;
+            }
+        }
+        button {
+            padding: 10px 20px;
+            text-transform: uppercase;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 2px;
+            border-radius: 5px;
+        };
+    }
+    &__text_length {
+        position: absolute;
+        bottom: 90px;
+        right: 30px;
+    }
+    &__button {
+        max-width: 40px;
+        width: 100%;
+        height: 40px;
+        border-radius: 50%;
+        background: url(../../assets/plusIcon.svg) center center / 25px no-repeat ;
+    }
 }
 
-.notation__window {
-    position: absolute;
-    top: -50%;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    width: 400px;
-    height: 400px;
-    z-index: 121;
-    background-color: #fff;
+.modal__notation-enter {
+    opacity: 0;
 }
-
-.notation__rectangle {
-    position: absolute;
-    width: 100%;
-    min-height: 100vh;
-    top: 0;
-    left: 0;
-    background-color: transparentize($blackColor, .5);
-    z-index: 120;
+.modal__notation-active {
+    opacity: 1;
+    transition: opacity 300ms;
+}
+.modal__notation-exit {
+    opacity: 1;
+}
+.modal__notation-exit-active {
+    opacity: 0;
+    transition: opacity 300ms;
 }

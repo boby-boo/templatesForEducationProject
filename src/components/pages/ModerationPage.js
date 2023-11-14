@@ -140,7 +140,8 @@ const ModerationPage = () => {
                 <CSSTransition timeout={200} classNames='cards__row'  key={index}>
                     <ModerationList 
                         value={addUserName} 
-                        key={index} title={item.title} 
+                        key={index} 
+                        title={item.title} 
                         data={item.template}
                     />
                 </CSSTransition>

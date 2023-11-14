@@ -20,46 +20,57 @@
         overflow-y: auto;
         word-wrap: break-word;
         border-radius: 10px;
-        .card {
-            width: 290px;
-            padding: 10px;
-            border-radius: 5px;
-            background-color: $lightColor;
-            box-shadow:  0 2px 3px $lightBlue, 0 0 4px $mainColor;
-            @include templateTransition(background-color);
-            cursor: pointer;
-            &:hover {
-                background-color: transparentize($lightColor, .3);
-            }
-            &:active {
-                background-color: transparentize($lightColor, 0.2);
-                box-shadow: 0px 4px 6px 3px #2d53db1a;
-            }
-            span {
-                display: block;
-                max-width: 80px;
-                margin-left: auto;
-                font-style: italic;
-            }
-            &-enter {
-                opacity: 0;
-            }
-            &-enter-active {
-                opacity: 1;
-                transition: opacity 300ms ease;
-            }
-            &-exit {
-                opacity: 1;
-            }
-            &-exit-active {
-                opacity: 1;
-                transition: opacity 300ms ease;
-            }
-        }
+        // .card {
+        //     width: 290px;
+        //     padding: 10px;
+        //     border-radius: 5px;
+        //     background-color: $lightColor;
+        //     box-shadow:  0 2px 3px $lightBlue, 0 0 4px $mainColor;
+        //     @include templateTransition(background-color);
+        //     cursor: pointer;
+        //     &:hover {
+        //         background-color: transparentize($lightColor, .3);
+        //     }
+        //     &:active {
+        //         background-color: transparentize($lightColor, 0.2);
+        //         box-shadow: 0px 4px 6px 3px #2d53db1a;
+        //     }
+        //     span {
+        //         display: block;
+        //         max-width: 80px;
+        //         margin-left: auto;
+        //         font-style: italic;
+        //     }
+        //     &-enter {
+        //         opacity: 0;
+        //     }
+        //     &-enter-active {
+        //         opacity: 1;
+        //         transition: opacity 300ms ease;
+        //     }
+        //     &-exit {
+        //         opacity: 1;
+        //     }
+        //     &-exit-active {
+        //         opacity: 1;
+        //         transition: opacity 300ms ease;
+        //     }
+        // }
     }
 };
 
-.long__template {
-    color: #df6d6d;
-};
+.notation-list {
+    &__button {
+        display: block;
+        padding: 5px 5px 2px 5px;
+        background: none;
+        border: none;
+        margin-left: auto;
+        opacity: .7;
+        @include templateTransition(opacity);
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
 
