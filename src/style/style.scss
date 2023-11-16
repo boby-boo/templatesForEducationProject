@@ -11,6 +11,12 @@ ul,li {
     list-style: none;
 }
 
+button {
+    outline: none;
+    border: none;
+    background: none;
+}
+
 body {
     width: 100%;
     font-family: 'Open Sans', sans-serif;
@@ -109,7 +115,7 @@ body {
 }
 
 @media(max-width: 900px){
-    .search__panel_wrapper {
+    .search__panel {
         flex-direction: column;
         row-gap: 20px;
         padding: 10px 0;

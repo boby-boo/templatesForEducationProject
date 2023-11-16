@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { v4 as uuid4 } from 'uuid';
@@ -27,6 +28,8 @@ const Notations = () => {
 
     const updateNotation = (e) => {
         e.preventDefault();
+        
+        if (text.length === 0) return;
 
         const notation = {
             id: uuid4(),
@@ -42,7 +45,6 @@ const Notations = () => {
         <>
             <button onClick={openModal} className='notation__button button'>
             </button>
-            <TransitionGroup component={null}>
                 <ModalNotation
                     text={text}
                     isOpen={isOpen}
@@ -50,7 +52,6 @@ const Notations = () => {
                     changeTextareaValue={changeTextareaValue}
                     closeModal={closeModal}
                 />
-            </TransitionGroup>
         </>
     );
 };
@@ -60,17 +61,20 @@ const ModalNotation = (props) => {
 
     let style = text.length > 200 ? 'long__template' : ''; 
 
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            updateNotation(e);
+        }
+    }
+
     return (
-        <CSSTransition
-            in={isOpen}
-            classNames='modal__notation'
-            timeout={300}
-            mountOnEnter
-            unmountOnExit>
+        <>
+        {isOpen && 
             <>
                 <form
+                    className="notation__modal"
                     onSubmit={updateNotation}
-                    className="notation__window"
+                    onKeyPress={handleKeyPress}
                 >
                     <h2>Введіть текст, який необхідно зберігти</h2>
                     <textarea value={text} 
@@ -80,12 +84,13 @@ const ModalNotation = (props) => {
                         required
                         onChange={changeTextareaValue}
                     />
-                    <button className='button'>Зберегти</button>
                     <div className={`notation__text_length ${style}`}>{text.length}/200</div>
+                    <button className='button'>Зберегти</button>
                 </form>
-                <div onClick={closeModal} className="overlay"></div>
+                <div onClick={closeModal} className="overlay"></div>   
             </>
-        </CSSTransition>
+        }  
+    </>
     )
 } 
 

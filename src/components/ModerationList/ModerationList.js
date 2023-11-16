@@ -72,12 +72,17 @@ const ModerationList = (props) => {
                 style = length > 200 ? 'long__template' : '';
 
             return (
-                <CSSTransition key={id} timeout={300} classNames='main-card'>
+                <CSSTransition key={id} timeout={300} classNames='notation-card'>
                     <li 
                         onClick={handleClick}
                         key={id} 
-                        className={`notation-list main-card ${style}`}>
-                        <button className='notation-list__button' onClick={() => props.filteredData(id)}>&#10060;</button>
+                        className={`main-card notation-card ${style}`}
+                    >
+                        <button 
+                            className='notation-list__button' 
+                            onClick={() => props.filteredData(id)}>
+                                &#10060;
+                        </button>
                         <div>
                             {text}
                         </div>

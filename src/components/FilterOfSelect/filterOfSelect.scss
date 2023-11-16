@@ -3,17 +3,13 @@
 .select__row {
     max-width: 150px;
     width: 100%;
-    margin-right: 30px;
     font-size: 12px;
     font-weight: 500;
     background-color: $lightColor;
     border-radius: 5px 5px 0 0;
     cursor: pointer;
-    z-index: 111;
     &_header {
-        position: relative;
         padding: 10px;
-        z-index: 111;
         @include templateTransition(all);
         &:hover {
             border-radius: 5px 5px 0 0;
@@ -38,15 +34,6 @@
         color: $lightColor;
         background-color: #df6d6d;
     }
-    &_window {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: transparentize($blackColor, 1);
-        z-index: 101;
-    }
     &_list {
         position: absolute;
         max-width: 150px;
@@ -55,8 +42,8 @@
         text-align: center;
         background-color: $lightColor;
         border-radius: 0 0 5px 5px;
-        row-gap: 5px;
         border-top: 1px solid transparentize($hoverColor, .4);
+        z-index: 2;
         @include templateTransition(all);
         &-enter {
             opacity: 0;
@@ -75,5 +62,14 @@
             transform: scale(0.9);
             transition: opacity 500ms, transform 500ms;
         }
+    }
+    &_window {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: transparentize($blackColor, 1);
+        z-index: 1;
     }
 }

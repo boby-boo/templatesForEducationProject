@@ -1,9 +1,11 @@
 import ModerationList from '../ModerationList/ModerationList';
 
-import './notationsPanel.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { filteredState } from '../redux/actions';
 import { useState } from 'react';
+
+import { filteredState } from '../redux/actions';
+
+import './notationsPanel.scss';
 
 const NotationsPanel = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -12,7 +14,8 @@ const NotationsPanel = () => {
     const dispatch = useDispatch();
 
     const filteredData = (id) => {
-        dispatch(filteredState(id))
+        dispatch(filteredState(id));
+        if (notationsData.length === 1) setIsVisible(false);
     };
 
     const showModal = () => {
@@ -31,7 +34,6 @@ const NotationsPanel = () => {
                     isNotation='true'
                 />
             </>
-
         )
     }
 
@@ -43,32 +45,28 @@ const NotationsPanel = () => {
 
     const content = renderItems(notationsData);
 
+    const panelPosition = {left: isVisible ? '0' : '-350px'};
+    const buttonPosition = {left: isVisible ? '340px' : '350px'};
+
     return (
         <>
-            {notationsData.length !== 0 &&
-                <button 
-                    className='notations__button'
-                    onClick={showModal}
-                    >
-                    button
+            <div className="notations-panel" style={panelPosition}>
+                <button
+                    style={buttonPosition}
+                    onClick={showModal} 
+                    className='notations-panel__button'>
+                        {notationsData.length}
                 </button>
+                <div className="notations-panel__row visible-panel">
+                    {content}
+                </div>
+            </div>
+            {isVisible &&
+                <div 
+                    onClick={() => setIsVisible(false)} 
+                    className="overlay">
+                </div>
             }
-            {isVisible && 
-                <>
-                    <div className="notations-panel">
-                    <button
-                        onClick={showModal} 
-                        className='notations__button_panel'>
-                        button
-                    </button>
-                            <div className="notations-panel__row visible-panel">
-                                {content}
-                            </div>
-                    </div>
-                    <div onClick={() => setIsVisible(false)} className="overlay__light"></div>
-                </>
-            }
-
         </>
     );
 };
