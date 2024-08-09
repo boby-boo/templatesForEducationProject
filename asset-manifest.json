@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/templatesForEducationProject/static/css/main.b775fbc9.css",
-    "main.js": "/templatesForEducationProject/static/js/main.105e2ea3.js",
+    "main.js": "/templatesForEducationProject/static/js/main.cd7c224c.js",
     "static/media/userIcon.svg": "/templatesForEducationProject/static/media/userIcon.497c7d0e78ad5ae8a8f2.svg",
     "static/media/closeIcon.svg": "/templatesForEducationProject/static/media/closeIcon.0bfe40d3a43f2f218c7b.svg",
     "static/media/searchIcon.svg": "/templatesForEducationProject/static/media/searchIcon.7e823e7abdc73aafcf56.svg",
     "static/media/plusIcon.svg": "/templatesForEducationProject/static/media/plusIcon.0032362276204adc13f8.svg",
     "index.html": "/templatesForEducationProject/index.html",
     "main.b775fbc9.css.map": "/templatesForEducationProject/static/css/main.b775fbc9.css.map",
-    "main.105e2ea3.js.map": "/templatesForEducationProject/static/js/main.105e2ea3.js.map"
+    "main.cd7c224c.js.map": "/templatesForEducationProject/static/js/main.cd7c224c.js.map"
   },
   "entrypoints": [
     "static/css/main.b775fbc9.css",
-    "static/js/main.105e2ea3.js"
+    "static/js/main.cd7c224c.js"
   ]
 }
